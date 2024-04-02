@@ -1,4 +1,4 @@
-# INGENIERÍA DE SOFTWARE III - GRUPO ???
+# INGENIERÍA DE SOFTWARE III - GRUPO 1
 
 Este grupo va a utilizar la estrategia de branching "Gitflow".
 Se va a tener la rama master o main, que funcionará como producción. Luego, estara la rama dev o develop que funciona como desarrollo/testeo.
