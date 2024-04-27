@@ -8,7 +8,6 @@ import jakarta.validation.constraints.Size;
 
 public class StudentDTO {
 
-	@NotNull
 	private Long oid;
 
 	@NotBlank

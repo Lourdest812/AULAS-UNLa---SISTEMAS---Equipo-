@@ -2,6 +2,7 @@ package com.example.classroomProject.models;
 
 import java.util.Set;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -38,8 +39,7 @@ public class Teacher {
 	@Column(name = "documentNumber")
 	private Long documentNumber;
 
-	@ManyToMany
-	@JoinTable(name = "teacher_has_course", joinColumns = @JoinColumn(name = "teacher_idteacher", referencedColumnName = "idteacher"), inverseJoinColumns = @JoinColumn(name = "course_idcourse", referencedColumnName = "idcourse"))
+	@ManyToMany(mappedBy = "teachers")
 	private Set<Course> courses;
 
 	public Teacher() {

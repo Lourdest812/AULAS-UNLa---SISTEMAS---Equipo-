@@ -1,9 +1,12 @@
 package com.example.classroomProject.models;
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Set;
 
 import com.example.classroomProject.enums.FourMonthPeriod;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -13,6 +16,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
@@ -38,9 +42,11 @@ public class Course {
 	@Column(name = "dictation_year")
 	private String dictationYear;
 
-	@Size(max = 50)
-	@Column(name = "schedule")
-	private String schedule;
+	@Column(name = "endTime")
+	private LocalTime endTime;
+
+	@Column(name = "startTime")
+	private LocalTime startTime;
 
 	@Enumerated(EnumType.STRING)
 	@NotNull
@@ -52,13 +58,19 @@ public class Course {
 	private Long student_limit;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "classroom_id_aula", referencedColumnName = "idAula")
+	@JoinColumn(name = "classroom_idAula", referencedColumnName = "idAula")
 	private Classroom classroom;
 
-	@ManyToMany(mappedBy = "courses")
+	@ManyToMany() 
+    @JoinTable(
+        name = "student_has_course",
+        joinColumns = @JoinColumn(name = "course_idcourse", referencedColumnName = "idcourse"),
+        inverseJoinColumns = @JoinColumn(name = "student_idalumno", referencedColumnName = "idalumno")
+    )
 	private Set<Student> students;
 
-	@ManyToMany(mappedBy = "courses")
+	@ManyToMany()
+	@JoinTable(name = "teacher_has_course", joinColumns = @JoinColumn(name = "course_idcourse", referencedColumnName = "idcourse"), inverseJoinColumns = @JoinColumn(name = "teacher_idteacher", referencedColumnName = "idteacher"))
 	private Set<Teacher> teachers;
 
 	public Course() {
@@ -66,16 +78,19 @@ public class Course {
 	}
 
 	public Course(Long oid, @Size(min = 5, max = 50) @NotBlank String subject, @Size(max = 50) String dictationYear,
-			@Size(max = 50) String schedule, @NotNull FourMonthPeriod fourMonthPeriod, @NotNull Long student_limit,
-			Classroom classroom) {
+			LocalTime endTime, LocalTime startTime, @NotNull FourMonthPeriod fourMonthPeriod,
+			@NotNull Long student_limit, Classroom classroom, Set<Student> students, Set<Teacher> teachers) {
 		super();
 		this.oid = oid;
 		this.subject = subject;
 		this.dictationYear = dictationYear;
-		this.schedule = schedule;
+		this.endTime = endTime;
+		this.startTime = startTime;
 		this.fourMonthPeriod = fourMonthPeriod;
 		this.student_limit = student_limit;
 		this.classroom = classroom;
+		this.students = students;
+		this.teachers = teachers;
 	}
 
 	public Long getOid() {
@@ -102,12 +117,20 @@ public class Course {
 		this.dictationYear = dictationYear;
 	}
 
-	public String getSchedule() {
-		return schedule;
+	public LocalTime getEndTime() {
+		return endTime;
 	}
 
-	public void setSchedule(String schedule) {
-		this.schedule = schedule;
+	public void setEndTime(LocalTime endTime) {
+		this.endTime = endTime;
+	}
+
+	public LocalTime getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(LocalTime startTime) {
+		this.startTime = startTime;
 	}
 
 	public FourMonthPeriod getFourMonthPeriod() {

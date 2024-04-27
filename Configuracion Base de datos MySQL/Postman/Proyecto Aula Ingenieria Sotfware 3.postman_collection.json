@@ -1,0 +1,541 @@
+{
+	"info": {
+		"_postman_id": "c14592ba-1156-4f99-8e31-b06376ee41ac",
+		"name": "Proyecto Aula Ingenieria Sotfware 3",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26268488"
+	},
+	"item": [
+		{
+			"name": "Student",
+			"item": [
+				{
+					"name": "createStudent",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Gustavo Fernandez\",\r\n    \"lastName\": \"Cupo\",\r\n    \"cohort\": 2021,\r\n    \"documentNumber\": 30903206\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/student",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"student"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getStudent",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/student/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"student",
+								"1"
+							],
+							"query": [
+								{
+									"key": "oid",
+									"value": "1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateStudent",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"oid\": 1,\r\n    \"name\": \"Andres Cambiado\",\r\n    \"lastName\": \"Cupo Cambiado\",\r\n    \"cohort\": 2021,\r\n    \"documentNumber\": 40903206\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/student/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"student",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllStudent",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/student/all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"student",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteStudents",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    1\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/student/delete",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"student",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "classroom",
+			"item": [
+				{
+					"name": "createClassroom",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Aula2\",\r\n    \"capability\": 40,\r\n    \"hasBlackboard\": false,\r\n    \"hasProjector\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/classroom",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"classroom"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getClassroom",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/classroom/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"classroom",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateClassroom",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"oid\": 1,\r\n    \"name\": \"Aula1 Cambiada\",\r\n    \"capability\": 150,\r\n    \"hasBlackboard\": true,\r\n    \"hasProjector\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/classroom/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"classroom",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getClassrooms",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/classroom/all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"classroom",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteClassrooms",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    1\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/classroom/delete",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"classroom",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Teacher",
+			"item": [
+				{
+					"name": "createTeacher",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Profesor2\",\r\n    \"lastName\": \"Profesor2 last name\",\r\n    \"documentNumber\": \"40903254\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/teacher",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"teacher"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getTeacher",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/teacher/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"teacher",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getTeachers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/teacher/all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"teacher",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateTeacher",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"oid\": 1,\r\n    \"name\": \"Profesor1 Modificado\",\r\n    \"lastName\": \"Profesor1 last name Modificado\",\r\n    \"documentNumber\": 40903254\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/teacher/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"teacher",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteTeachers",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    1\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/teacher/delete",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"teacher",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Course",
+			"item": [
+				{
+					"name": "createCourse",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"subject\": \"Matematica 1\",\r\n    \"startTime\": \"08:00:00\",\r\n    \"endTime\": \"12:00:00\",\r\n    \"student_limit\": 100,\r\n    \"classroomOid\": 1,\r\n    \"students\": [\r\n        {\r\n            \"oid\": 1,\r\n            \"name\": \"Gustavo Fernandez\",\r\n            \"lastName\": \"Cupo\",\r\n            \"cohort\": 2021,\r\n            \"documentNumber\": 30903206\r\n        }\r\n    ],\r\n    \"teachers\": [\r\n        {\r\n            \"oid\": 1,\r\n            \"name\": \"Profesor2\",\r\n            \"lastName\": \"Profesor2 last name\",\r\n            \"documentNumber\": 40903254 \r\n        }\r\n    ],\r\n    \"fourMonthPeriod\":\"FIRST_QUARTER\",\r\n    \"dictationYear\": 2024\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/course",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"course"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getCourse",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/course/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"course",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllCourses",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/course/all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"course",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateCourse",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"oid\": 1,\r\n        \"subject\": \"Matematica 1\",\r\n        \"endTime\": \"12:00:00\",\r\n        \"startTime\": \"08:00:00\",\r\n        \"student_limit\": 100,\r\n        \"classroomOid\": 1,\r\n        \"classroomName\": \"Aula2\",\r\n        \"students\": [\r\n            {\r\n                \"oid\": 1,\r\n                \"name\": \"Gustavo Fernandez\",\r\n                \"lastName\": \"Cupo\",\r\n                \"cohort\": 2021,\r\n                \"documentNumber\": 30903206\r\n            }\r\n        ],\r\n        \"teachers\": [\r\n            {\r\n                \"oid\": 1,\r\n                \"name\": \"Profesor2\",\r\n                \"lastName\": \"Profesor2 last name\",\r\n                \"documentNumber\": 40903254\r\n            }\r\n        ],\r\n        \"fourMonthPeriod\": \"FIRST_QUARTER\",\r\n        \"dictationYear\": \"2024\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/course/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"course",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteCourses",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    1\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/course/delete",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"course",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
