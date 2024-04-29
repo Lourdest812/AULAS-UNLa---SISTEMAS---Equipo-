@@ -44,7 +44,7 @@ public class CourseControllerImpl implements CourseController {
 
 	@Override
 	@GetMapping(path = "/{oid}")
-	public ResponseEntity<CourseDTO> getCourse(Long oid) {
+	public ResponseEntity<CourseDTO> getCourse(@PathVariable Long oid) {
 		CourseDTO response = getCourseMapper().courseToDTO(getCourseService().findByOid(oid).get());
 		return new ResponseEntity<CourseDTO>(response, HttpStatus.OK);
 	}
@@ -64,7 +64,7 @@ public class CourseControllerImpl implements CourseController {
 	}
 
 	@Override
-	@PutMapping
+	@PutMapping(path = "/delete")
 	public ResponseEntity<Boolean> deleteCourses(@RequestBody List<Long> oids) {
 		getCourseService().deleteCourses(oids);
 		return new ResponseEntity<Boolean>(true, HttpStatus.OK);

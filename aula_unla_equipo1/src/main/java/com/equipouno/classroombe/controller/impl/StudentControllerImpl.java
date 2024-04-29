@@ -64,8 +64,8 @@ public class StudentControllerImpl implements StudentController {
 	}
 
 	@Override
-	@PutMapping
-	public ResponseEntity<Boolean> deleteStudents(List<Long> oids) {
+	@PutMapping(path = "/delete")
+	public ResponseEntity<Boolean> deleteStudents(@RequestBody List<Long> oids) {
 		getStudentService().deleteStudents(oids);
 		return new ResponseEntity<Boolean>(true, HttpStatus.OK);
 	}

@@ -18,7 +18,7 @@ USE `proyecto_aula_unla_equipo1` ;
 -- Table `proyecto_aula_unla_equipo1`.`classroom`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `proyecto_aula_unla_equipo1`.`classroom` (
-  `idAula` INT NOT NULL,
+  `idAula` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(50) NULL,
   `capability` INT NULL,
   `hasBlackboard` TINYINT NULL,
@@ -32,7 +32,7 @@ ENGINE = InnoDB;
 -- Table `proyecto_aula_unla_equipo1`.`student`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `proyecto_aula_unla_equipo1`.`student` (
-  `idalumno` INT NOT NULL,
+  `idalumno` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NULL,
   `cohort` INT NULL,
   `documentNumber` INT NULL,
@@ -45,7 +45,7 @@ ENGINE = InnoDB;
 -- Table `proyecto_aula_unla_equipo1`.`teacher`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `proyecto_aula_unla_equipo1`.`teacher` (
-  `idteacher` INT NOT NULL,
+  `idteacher` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NULL,
   `documentNumber` INT NULL,
   `lastName` VARCHAR(45) NULL,
@@ -57,11 +57,12 @@ ENGINE = InnoDB;
 -- Table `proyecto_aula_unla_equipo1`.`course`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `proyecto_aula_unla_equipo1`.`course` (
-  `idcourse` INT NOT NULL,
+  `idcourse` INT NOT NULL AUTO_INCREMENT,
   `subject` VARCHAR(50) NULL,
+  `startTime` TIME NULL,
+  `endTime` TIME NULL,
   `dictation_year` VARCHAR(20) NULL,
-  `schedule` VARCHAR(45) NULL,
-  `four_month_period` ENUM("Primer Cuatrimestre", "Segundo Cuatrimestre", "Anual") NULL,
+  `four_month_period` ENUM("FIRST_QUARTER", "SECOND_TERM", "ANNUAL") NULL,
   `student_limit` INT NULL,
   `classroom_idAula` INT NOT NULL,
   PRIMARY KEY (`idcourse`, `classroom_idAula`),

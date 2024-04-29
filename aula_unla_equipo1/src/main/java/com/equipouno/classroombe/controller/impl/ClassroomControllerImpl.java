@@ -64,7 +64,7 @@ public class ClassroomControllerImpl implements ClassroomController {
 	}
 
 	@Override
-	@PutMapping
+	@PutMapping(path = "/delete")
 	public ResponseEntity<Boolean> deleteClassrooms(@RequestBody List<Long> oids) {
 		getClassroomService().deleteClassrooms(oids);
 		return new ResponseEntity<Boolean>(true, HttpStatus.OK);
