@@ -1,0 +1,40 @@
+<div class="card">
+  <div class="flex flex-row-reverse flex-wrap">
+    <p-button (click)="showDialog()" class="mx-1" icon="pi pi-plus" [rounded]="true" severity="success"></p-button>
+    <p-button class="mx-1" icon="pi pi-pencil" [rounded]="true" [disabled]="true" severity="danger"></p-button>
+    <p-button class="mx-1" icon="pi pi-trash" [rounded]="true" [disabled]="true"></p-button>
+  </div>
+  <p-table [value]="students" [(selection)]="seletedStudents" dataKey="oid" [rowSelectable]="isRowSelectable"
+    selectionMode="multiple" [tableStyle]="{'min-width': '50rem'}" >
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width: 4rem">
+          <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+        </th>
+        <th style="min-width:200px">ID</th>
+        <th style="min-width:200px">Nombre</th>
+        <th style="min-width:200px">Apellido</th>
+        <th style="min-width:200px">Cohorte</th>
+        <th style="min-width:200px">Numero de Documento</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-student>
+      <tr>
+        <td>
+          <p-tableCheckbox [value]="student"></p-tableCheckbox>
+        </td>
+        <td>{{student.oid}}</td>
+        <td>{{student.name}}</td>
+        <td>{{student.lastName}}</td>
+        <td>{{student.cohort}}</td>
+        <td>{{student.documentNumber}}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+  <p-dialog [style]="{ width: '30vw' }" header="Formulario Alumno" [(visible)]="visibleModal" [modal]="true" [draggable]="false"
+    [resizable]="false">
+    <p-divider></p-divider>
+    <student-form [visibleModal]="visibleModal" [studentElement]="seletedStudents"></student-form>
+  </p-dialog>
+</div>

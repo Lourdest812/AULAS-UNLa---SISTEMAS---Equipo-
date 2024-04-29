@@ -1,12 +1,10 @@
 package com.example.classroomProject.models;
 
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Set;
 
 import com.example.classroomProject.enums.FourMonthPeriod;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

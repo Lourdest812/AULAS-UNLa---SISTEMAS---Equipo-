@@ -1,0 +1,14 @@
+<div class="layout-wrapper" [ngClass]="containerClass">
+  <app-menu-bar></app-menu-bar>
+  <div class="layout-sidebar">
+    <sidebar-container></sidebar-container>
+  </div>
+  <div class="layout-main-container">
+    <div class="layout-main">
+      <router-outlet></router-outlet>
+    </div>
+    <footer></footer>
+  </div>
+  <app-config-main-menu></app-config-main-menu>
+  <div class="layout-mask"></div>
+</div>
