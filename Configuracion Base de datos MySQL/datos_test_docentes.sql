@@ -1,5 +1,5 @@
 # INSERT DOCENTES
-INSERT INTO `student` (`idteacher`,`name`,`documentNumber`,`lastName`)
+INSERT INTO `teacher` (`idteacher`,`name`,`documentNumber`,`lastName`)
 VALUES
   (1,"Rebekah",27849734,"Pace"),
   (2,"Bryar",23353021,"Cantrell"),

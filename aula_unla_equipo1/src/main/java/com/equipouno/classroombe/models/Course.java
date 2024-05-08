@@ -40,12 +40,6 @@ public class Course {
 	@Column(name = "dictation_year")
 	private String dictationYear;
 
-	@Column(name = "endTime")
-	private LocalTime endTime;
-
-	@Column(name = "startTime")
-	private LocalTime startTime;
-
 	@Enumerated(EnumType.STRING)
 	@NotNull
 	@Column(name = "four_month_period")
