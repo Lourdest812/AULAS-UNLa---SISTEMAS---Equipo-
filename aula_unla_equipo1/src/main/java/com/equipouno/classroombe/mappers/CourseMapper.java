@@ -29,8 +29,6 @@ public abstract class CourseMapper {
 	@Mapping(target = "oid", source = "dto.oid")
 	@Mapping(target = "subject", source = "dto.subject")
 	@Mapping(target = "dictationYear", source = "dto.dictationYear")
-	@Mapping(target = "endTime", source = "dto.endTime")
-	@Mapping(target = "startTime", source = "dto.startTime")
 	@Mapping(target = "fourMonthPeriod", source = "dto.fourMonthPeriod")
 	@Mapping(target = "student_limit", source = "dto.student_limit")
 	@Mapping(target = "students", source = "dto.students")
@@ -40,8 +38,6 @@ public abstract class CourseMapper {
 	@Mapping(target = "oid", source = "entity.oid")
 	@Mapping(target = "subject", source = "entity.subject")
 	@Mapping(target = "dictationYear", source = "entity.dictationYear")
-	@Mapping(target = "endTime", source = "entity.endTime")
-	@Mapping(target = "startTime", source = "entity.startTime")
 	@Mapping(target = "fourMonthPeriod", source = "entity.fourMonthPeriod")
 	@Mapping(target = "student_limit", source = "entity.student_limit")
 	@Mapping(target = "students", source = "entity.students")
@@ -50,12 +46,12 @@ public abstract class CourseMapper {
 	@Mapping(target = "classroomName", source = "entity.classroom.name")
 	public abstract CourseDTO courseToDTO(Course entity);
 
-	@BeforeMapping
-	protected void mapClassroom(CourseDTO dto, @MappingTarget Course course) {
-		if (dto.getClassroomOid() != null) {
-			course.setClassroom(getClassroomService().findByOid(dto.getClassroomOid()).orElseThrow());
-		}
-	}
+//	@BeforeMapping
+//	protected void mapClassroom(CourseDTO dto, @MappingTarget Course course) {
+//		if (dto.getClassroomOid() != null) {
+//			course.setClassroom(getClassroomService().findByOid(dto.getClassroomOid()).orElseThrow());
+//		}
+//	}
 
 	public abstract List<CourseDTO> coursesToDTOList(List<Course> courses);
 
