@@ -29,7 +29,11 @@ export class StudentService {
   }
 
   public deleteStudents(oids: number[]): Observable<boolean>{
-    return this.httpClient.post<boolean>(`${environment.backendUrl}/student/delete`,oids);
+    const options = {
+      headers: this.httpHeaders,
+      body: oids
+    };
+    return this.httpClient.delete<boolean>(`${environment.backendUrl}/student/delete`,options);
   }
 
 

@@ -6,6 +6,7 @@ import { StudentMainPageComponent } from './student-main-page/student-main-page.
 import { SharedModule } from '../shared/shared.module';
 import { StudentFormComponent } from './student-form/student-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 
 @NgModule({
@@ -18,6 +19,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     StudentAdmnistrationRoutingModule,
     SharedModule,
     ReactiveFormsModule
+  ],
+  providers: [
+    MessageService,
+    ConfirmationService
   ]
 })
 export class StudentAdmnistrationModule { }
