@@ -40,12 +40,6 @@ public class Course {
 	@Column(name = "dictation_year")
 	private String dictationYear;
 
-	@Column(name = "endTime")
-	private LocalTime endTime;
-
-	@Column(name = "startTime")
-	private LocalTime startTime;
-
 	@Enumerated(EnumType.STRING)
 	@NotNull
 	@Column(name = "four_month_period")
@@ -76,14 +70,11 @@ public class Course {
 	}
 
 	public Course(Long oid, @Size(min = 5, max = 50) @NotBlank String subject, @Size(max = 50) String dictationYear,
-			LocalTime endTime, LocalTime startTime, @NotNull FourMonthPeriod fourMonthPeriod,
-			@NotNull Long student_limit, Classroom classroom, Set<Student> students, Set<Teacher> teachers) {
+			@NotNull FourMonthPeriod fourMonthPeriod, @NotNull Long student_limit, Classroom classroom, Set<Student> students, Set<Teacher> teachers) {
 		super();
 		this.oid = oid;
 		this.subject = subject;
 		this.dictationYear = dictationYear;
-		this.endTime = endTime;
-		this.startTime = startTime;
 		this.fourMonthPeriod = fourMonthPeriod;
 		this.student_limit = student_limit;
 		this.classroom = classroom;
@@ -115,21 +106,6 @@ public class Course {
 		this.dictationYear = dictationYear;
 	}
 
-	public LocalTime getEndTime() {
-		return endTime;
-	}
-
-	public void setEndTime(LocalTime endTime) {
-		this.endTime = endTime;
-	}
-
-	public LocalTime getStartTime() {
-		return startTime;
-	}
-
-	public void setStartTime(LocalTime startTime) {
-		this.startTime = startTime;
-	}
 
 	public FourMonthPeriod getFourMonthPeriod() {
 		return fourMonthPeriod;

@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Student } from '../model/student';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { DialogEventResponse } from '../../shared/shared-class/dialogEventResponse';
 
 @Component({
   selector: 'student-form',
@@ -10,19 +11,19 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 export class StudentFormComponent implements OnInit {
 
   @Input()
-  public visibleModal!: boolean;
-
-  @Input()
   public studentElement!: Student;
 
   public studentForm!: FormGroup;
+
+  @Output()
+  public showDialogEvent = new EventEmitter<DialogEventResponse>;
 
   constructor(private fb: FormBuilder){
     this.initializeStudentForm();
   }
 
   ngOnInit(): void {
-    console.log(this.studentElement);
+    this.loadData();
   }
 
   private initializeStudentForm(): void {
@@ -53,13 +54,23 @@ export class StudentFormComponent implements OnInit {
     }
   }
 
+  public loadData(): void {
+    this.studentForm.controls['oid'].setValue(this.studentElement.oid);
+    this.studentForm.controls['name'].setValue(this.studentElement.name);
+    this.studentForm.controls['lastName'].setValue(this.studentElement.lastName);
+    this.studentForm.controls['cohort'].setValue(this.studentElement.cohort);
+    this.studentForm.controls['documentNumber'].setValue(this.studentElement.documentNumber);
+  }
+
   public onSave(): void {
     this.saveData();
-    this.visibleModal = false;
+    this.showDialogEvent.emit(new DialogEventResponse(false,false));
+    this.studentForm.reset();
   }
 
   public cancelForm(): void {
-    this.visibleModal = false;
+    this.showDialogEvent.emit(new DialogEventResponse(false,true));
+    this.studentForm.reset();
   }
 
 }

@@ -8,12 +8,12 @@ const routes: Routes = [
     loadChildren: () => import('./auth/outh.module').then( m => m.AuthModule)
   },
   {
-    path: 'mainPage',
+    path: 'dashboard',
     loadChildren: () => import('./main-page/main-page.module').then( m => m.MainPageModule)
   },
   {
     path: '**',
-    redirectTo: 'auth'
+    redirectTo: 'dashboard'
   }
 ];
 

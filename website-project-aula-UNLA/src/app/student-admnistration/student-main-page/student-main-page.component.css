@@ -1,0 +1,12 @@
+:host ::ng-deep .p-dialog-header{
+  padding: 0.5rem;
+}
+
+:host ::ng-deep .p-toast-message{
+  padding: 0.3rem;
+}
+
+
+:host ::ng-deep .p-toast-message-icon{
+  margin-right: 0.5rem;
+}

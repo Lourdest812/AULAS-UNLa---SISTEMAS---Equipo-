@@ -17,10 +17,6 @@ public class CourseDTO {
 	@Size(min = 5, max = 50)
 	private String subject;
 
-	private LocalTime endTime;
-
-	private LocalTime startTime;
-
 	@NotNull
 	private Long student_limit;
 
@@ -36,15 +32,12 @@ public class CourseDTO {
 
 	private String dictationYear;
 
-	public CourseDTO(Long oid, @NotBlank @Size(min = 5, max = 50) String subject, LocalTime endTime,
-			LocalTime startTime, @NotNull Long student_limit, Long classroomOid, String classroomName,
+	public CourseDTO(Long oid, @NotBlank @Size(min = 5, max = 50) String subject, @NotNull Long student_limit, Long classroomOid, String classroomName,
 			List<StudentDTO> students, List<TeacherDTO> teachers, FourMonthPeriod fourMonthPeriod,
 			String dictationYear) {
 		super();
 		this.oid = oid;
 		this.subject = subject;
-		this.endTime = endTime;
-		this.startTime = startTime;
 		this.student_limit = student_limit;
 		this.classroomOid = classroomOid;
 		this.classroomName = classroomName;
@@ -72,22 +65,6 @@ public class CourseDTO {
 
 	public void setSubject(String subject) {
 		this.subject = subject;
-	}
-
-	public LocalTime getEndTime() {
-		return endTime;
-	}
-
-	public void setEndTime(LocalTime endTime) {
-		this.endTime = endTime;
-	}
-
-	public LocalTime getStartTime() {
-		return startTime;
-	}
-
-	public void setStartTime(LocalTime startTime) {
-		this.startTime = startTime;
 	}
 
 	public Long getStudent_limit() {

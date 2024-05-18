@@ -18,7 +18,7 @@ USE `proyecto_aula_unla_equipo1` ;
 -- Table `proyecto_aula_unla_equipo1`.`classroom`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `proyecto_aula_unla_equipo1`.`classroom` (
-  `idAula` INT NOT NULL AUTO_INCREMENT,
+  `idAula` INT NOT NULL,
   `name` VARCHAR(50) NULL,
   `capability` INT NULL,
   `hasBlackboard` TINYINT NULL,
@@ -32,7 +32,7 @@ ENGINE = InnoDB;
 -- Table `proyecto_aula_unla_equipo1`.`student`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `proyecto_aula_unla_equipo1`.`student` (
-  `idalumno` INT NOT NULL AUTO_INCREMENT,
+  `idalumno` INT NOT NULL,
   `name` VARCHAR(45) NULL,
   `cohort` INT NULL,
   `documentNumber` INT NULL,
@@ -45,7 +45,7 @@ ENGINE = InnoDB;
 -- Table `proyecto_aula_unla_equipo1`.`teacher`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `proyecto_aula_unla_equipo1`.`teacher` (
-  `idteacher` INT NOT NULL AUTO_INCREMENT,
+  `idteacher` INT NOT NULL,
   `name` VARCHAR(45) NULL,
   `documentNumber` INT NULL,
   `lastName` VARCHAR(45) NULL,
@@ -57,23 +57,15 @@ ENGINE = InnoDB;
 -- Table `proyecto_aula_unla_equipo1`.`course`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `proyecto_aula_unla_equipo1`.`course` (
-  `idcourse` INT NOT NULL AUTO_INCREMENT,
-  `subject` VARCHAR(50) NULL,
-  `startTime` TIME NULL,
-  `endTime` TIME NULL,
+  `idcourse` INT NOT NULL,
+  `subject` VARCHAR(100) NULL,
   `dictation_year` VARCHAR(20) NULL,
-  `four_month_period` ENUM("FIRST_QUARTER", "SECOND_TERM", "ANNUAL") NULL,
+  `schedule` VARCHAR(45) NULL,
+  `four_month_period` ENUM("Primer Cuatrimestre", "Segundo Cuatrimestre", "Anual") NULL,
   `student_limit` INT NULL,
-  `classroom_idAula` INT NOT NULL,
-  PRIMARY KEY (`idcourse`, `classroom_idAula`),
-  INDEX `fk_course_classroom1_idx` (`classroom_idAula` ASC) VISIBLE,
-  CONSTRAINT `fk_course_classroom1`
-    FOREIGN KEY (`classroom_idAula`)
-    REFERENCES `proyecto_aula_unla_equipo1`.`classroom` (`idAula`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  `classroom_idAula` INT DEFAULT NULL,
+  PRIMARY KEY (`idcourse`))
 ENGINE = InnoDB;
-
 
 -- -----------------------------------------------------
 -- Table `proyecto_aula_unla_equipo1`.`student_has_course`

@@ -10,6 +10,9 @@ import { DialogModule } from 'primeng/dialog';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { InputTextModule } from 'primeng/inputtext';
 import { DividerModule } from 'primeng/divider';
+import { MessagesModule } from 'primeng/messages';
+import { ToastModule } from 'primeng/toast';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 
 @NgModule({
@@ -22,7 +25,10 @@ import { DividerModule } from 'primeng/divider';
     TableModule,
     DialogModule,
     InputNumberModule,
-    DividerModule
+    DividerModule,
+    MessagesModule,
+    ToastModule,
+    ConfirmDialogModule
 
   ],
   exports: [
@@ -33,7 +39,10 @@ import { DividerModule } from 'primeng/divider';
     DialogModule,
     InputNumberModule,
     InputTextModule,
-    DividerModule
+    DividerModule,
+    MessagesModule,
+    ToastModule,
+    ConfirmDialogModule
   ]
 })
 export class SharedModule { }
