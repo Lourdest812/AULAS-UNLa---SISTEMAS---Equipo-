@@ -7,10 +7,6 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema proyecto_aula_unla_equipo1
 -- -----------------------------------------------------
-
--- -----------------------------------------------------
--- Schema proyecto_aula_unla_equipo1
--- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `proyecto_aula_unla_equipo1` DEFAULT CHARACTER SET utf8 ;
 USE `proyecto_aula_unla_equipo1` ;
 
@@ -18,7 +14,7 @@ USE `proyecto_aula_unla_equipo1` ;
 -- Table `proyecto_aula_unla_equipo1`.`classroom`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `proyecto_aula_unla_equipo1`.`classroom` (
-  `idAula` INT NOT NULL,
+  `idAula` BIGINT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(50) NULL,
   `capability` INT NULL,
   `hasBlackboard` TINYINT NULL,
@@ -27,12 +23,11 @@ CREATE TABLE IF NOT EXISTS `proyecto_aula_unla_equipo1`.`classroom` (
   PRIMARY KEY (`idAula`))
 ENGINE = InnoDB;
 
-
 -- -----------------------------------------------------
 -- Table `proyecto_aula_unla_equipo1`.`student`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `proyecto_aula_unla_equipo1`.`student` (
-  `idalumno` INT NOT NULL,
+  `idalumno` BIGINT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NULL,
   `cohort` INT NULL,
   `documentNumber` INT NULL,
@@ -40,39 +35,41 @@ CREATE TABLE IF NOT EXISTS `proyecto_aula_unla_equipo1`.`student` (
   PRIMARY KEY (`idalumno`))
 ENGINE = InnoDB;
 
-
 -- -----------------------------------------------------
 -- Table `proyecto_aula_unla_equipo1`.`teacher`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `proyecto_aula_unla_equipo1`.`teacher` (
-  `idteacher` INT NOT NULL,
+  `idteacher` BIGINT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NULL,
   `documentNumber` INT NULL,
   `lastName` VARCHAR(45) NULL,
   PRIMARY KEY (`idteacher`))
 ENGINE = InnoDB;
 
-
 -- -----------------------------------------------------
 -- Table `proyecto_aula_unla_equipo1`.`course`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `proyecto_aula_unla_equipo1`.`course` (
-  `idcourse` INT NOT NULL,
-  `subject` VARCHAR(100) NULL,
-  `dictation_year` VARCHAR(20) NULL,
-  `schedule` VARCHAR(45) NULL,
-  `four_month_period` ENUM("Primer Cuatrimestre", "Segundo Cuatrimestre", "Anual") NULL,
-  `student_limit` INT NULL,
-  `classroom_idAula` INT DEFAULT NULL,
-  PRIMARY KEY (`idcourse`))
+  `idcourse` BIGINT NOT NULL AUTO_INCREMENT,
+  `subject` VARCHAR(50) NOT NULL,
+  `dictation_year` VARCHAR(50) NULL,
+  `four_month_period` ENUM('FIRST', 'SECOND', 'THIRD', 'FOURTH') NOT NULL,
+  `student_limit` BIGINT NOT NULL,
+  `classroom_idAula` BIGINT,
+  PRIMARY KEY (`idcourse`),
+  CONSTRAINT `fk_course_classroom`
+    FOREIGN KEY (`classroom_idAula`)
+    REFERENCES `proyecto_aula_unla_equipo1`.`classroom` (`idAula`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 -- -----------------------------------------------------
 -- Table `proyecto_aula_unla_equipo1`.`student_has_course`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `proyecto_aula_unla_equipo1`.`student_has_course` (
-  `student_idalumno` INT NOT NULL,
-  `course_idcourse` INT NOT NULL,
+  `student_idalumno` BIGINT NOT NULL,
+  `course_idcourse` BIGINT NOT NULL,
   PRIMARY KEY (`student_idalumno`, `course_idcourse`),
   INDEX `fk_student_has_course_course1_idx` (`course_idcourse` ASC) VISIBLE,
   INDEX `fk_student_has_course_student_idx` (`student_idalumno` ASC) VISIBLE,
@@ -88,13 +85,12 @@ CREATE TABLE IF NOT EXISTS `proyecto_aula_unla_equipo1`.`student_has_course` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-
 -- -----------------------------------------------------
 -- Table `proyecto_aula_unla_equipo1`.`teacher_has_course`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `proyecto_aula_unla_equipo1`.`teacher_has_course` (
-  `teacher_idteacher` INT NOT NULL,
-  `course_idcourse` INT NOT NULL,
+  `teacher_idteacher` BIGINT NOT NULL,
+  `course_idcourse` BIGINT NOT NULL,
   PRIMARY KEY (`teacher_idteacher`, `course_idcourse`),
   INDEX `fk_teacher_has_course_course1_idx` (`course_idcourse` ASC) VISIBLE,
   INDEX `fk_teacher_has_course_teacher1_idx` (`teacher_idteacher` ASC) VISIBLE,
@@ -109,7 +105,6 @@ CREATE TABLE IF NOT EXISTS `proyecto_aula_unla_equipo1`.`teacher_has_course` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
-
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
