@@ -1,1 +1,49 @@
-<p>classroom-management works!</p>
+<div class="card">
+  <div class="flex flex-row-reverse flex-wrap">
+    <p-button (click)="showDialog()" [disabled]="!(this.seletedClassrooms.length <= 1)" class="mx-1" icon="pi pi-plus"
+      [rounded]="true" severity="success"></p-button>
+    <p-button (click)="showDialog()" class="mx-1" icon="pi pi-pencil" [rounded]="true"
+      [disabled]="!(this.seletedClassrooms.length == 1)" severity="danger"></p-button>
+    <p-button (click)="deleteClassrooms($event)" [disabled]="(this.seletedClassrooms.length < 1)" class="mx-1" icon="pi pi-trash" [rounded]="true"></p-button>
+    <p-confirmDialog [transitionOptions]="'300ms'"/>
+  </div>
+  <p-table [value]="classrooms" [(selection)]="seletedClassrooms" (selectionChange)="onSelectionChange($event)"
+    dataKey="oid" [rowSelectable]="isRowSelectable" selectionMode="multiple" [tableStyle]="{'min-width': '50rem'}">
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width: 4rem">
+          <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+        </th>
+        <th style="min-width:200px">ID</th>
+        <th style="min-width:200px">Nombre</th>
+        <th style="min-width:200px">Capacidad</th>
+        <th style="min-width:200px">Tiene pizarron</th>
+        <th style="min-width:200px">Tiene proyector</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-classroom>
+      <tr>
+        <td>
+          <p-tableCheckbox [value]="classroom"></p-tableCheckbox>
+        </td>
+        <td>{{classroom.oid}}</td>
+        <td>{{classroom.name}}</td>
+        <td>{{classroom.capability}}</td>
+        <td>{{classroom.hasBlackboard}}</td>
+        <td>{{classroom.hasProjector}}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+  <p-dialog [style]="dialogStyles" header="Formulario Aulas" [closable]="false" [(visible)]="visibleModal"
+    [modal]="true" [draggable]="false" [resizable]="false">
+    <p-divider></p-divider>
+
+    <classroom-form *ngIf="visibleModal" (showDialogEvent)="recieveDialogEvent($event)"
+      [classroomElement]="classroomElement"></classroom-form>
+
+  </p-dialog>
+</div>
+
+<p-toast [showTransitionOptions]="'500ms'"/>
+

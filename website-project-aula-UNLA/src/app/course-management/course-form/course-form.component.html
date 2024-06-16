@@ -1,0 +1,90 @@
+<div [formGroup]="courseForm">
+
+  <div class="formgrid grid m-auto">
+    <div class="col-6 my-3">
+      <div class="flex flex-column gap-2">
+        <label for="subject">Nombre</label>
+        <input pInputText formControlName="subject" />
+      </div>
+    </div>
+
+    <div class="col-6 my-3">
+      <label class="block mb-2" for="locale-user">Cantidad de Estudiantes</label>
+      <p-inputNumber mode="decimal" inputId="withoutgrouping" [useGrouping]="false"
+        formControlName="studentLimit"></p-inputNumber>
+    </div>
+
+    <div class="col-6 my-3">
+      <div class="flex flex-column gap-2">
+        <label for="subject">Año dictado de la materia</label>
+        <input pInputText formControlName="dictationYear" />
+      </div>
+    </div>
+
+    <div class="col-6 my-3">
+      <div class="flex flex-column gap-2">
+        <p-dropdown class="p-dropdown-styles" formControlName="classroom" [options]="classrooms" optionLabel="name"
+          placeholder="Seleccion el aula" />
+      </div>
+    </div>
+
+    <div class="col-6 my-3">
+      <div class="flex flex-column gap-2">
+        <p-dropdown class="p-dropdown-styles" formControlName="fourMonthPeriod" [options]="periods" optionLabel="label"
+          placeholder="Seleccione el periodo" />
+      </div>
+    </div>
+
+  </div>
+
+  <p-panel header="Administracion de Alumnos" [toggleable]="true" [collapsed]="true">
+    <p-pickList [source]="sourceStudent" [target]="targetStudent" sourceHeader="Alumnos para asignar"
+      targetHeader="Alumnos ya asignados" [dragdrop]="true" [responsive]="true" [sourceStyle]="{ height: '30rem' }"
+      [targetStyle]="{ height: '30rem' }" breakpoint="1400px">
+      <ng-template let-student pTemplate="item">
+        <div class="flex flex-wrap p-2 align-items-center gap-3">
+          <div class="flex-1 flex flex-column gap-2">
+            <span class="font-bold">
+              {{ student.name }}
+            </span>
+            <div class="flex align-items-center gap-2">
+              <span>
+                {{ student.documentNumber }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </p-pickList>
+  </p-panel>
+
+  <p-panel header="Administracion de Profesores" [toggleable]="true" [collapsed]="true">
+    <p-pickList [source]="sourceTeacher" [target]="targetTeacher" sourceHeader="Profesor para asignar"
+      targetHeader="Profesores ya asignados" [dragdrop]="true" [responsive]="true" [sourceStyle]="{ height: '30rem' }"
+      [targetStyle]="{ height: '30rem' }" breakpoint="1400px">
+      <ng-template let-teacher pTemplate="item">
+        <div class="flex flex-wrap p-2 align-items-center gap-3">
+          <div class="flex-1 flex flex-column gap-2">
+            <span class="font-bold">
+              {{ teacher.name }}
+            </span>
+            <div class="flex align-items-center gap-2">
+              <span>
+                {{ teacher.documentNumber }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </p-pickList>
+  </p-panel>
+
+  <div class="flex justify-content-between flex-wrap m-2">
+    <div class="flex align-items-center justify-content-center">
+      <p-button (onClick)="cancelForm()" label="Cancelar" severity="danger"></p-button>
+    </div>
+
+    <div class="flex align-items-center justify-content-center">
+      <p-button (onClick)="onSave()" label="Guardar" severity="success"></p-button>
+    </div>
+  </div>

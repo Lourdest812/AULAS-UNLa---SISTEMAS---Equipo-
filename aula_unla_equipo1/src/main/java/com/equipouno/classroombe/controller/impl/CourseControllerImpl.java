@@ -7,12 +7,14 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.equipouno.classroombe.controller.CourseController;
@@ -23,7 +25,7 @@ import com.equipouno.classroombe.service.impl.CourseServiceImpl;
 
 import jakarta.validation.Valid;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200",methods = {RequestMethod.DELETE,RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT})
 @RestController(CourseControllerImpl.BEAN_NAME)
 @RequestMapping(path = "course")
 public class CourseControllerImpl implements CourseController {
@@ -66,7 +68,7 @@ public class CourseControllerImpl implements CourseController {
 	}
 
 	@Override
-	@PutMapping(path = "/delete")
+	@DeleteMapping(path = "/delete")
 	public ResponseEntity<Boolean> deleteCourses(@RequestBody List<Long> oids) {
 		getCourseService().deleteCourses(oids);
 		return new ResponseEntity<Boolean>(true, HttpStatus.OK);

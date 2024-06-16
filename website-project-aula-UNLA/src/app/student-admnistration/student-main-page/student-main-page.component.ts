@@ -40,10 +40,12 @@ export class StudentMainPageComponent implements OnInit {
     this.loadStudentList();
   }
 
-  /*Metodo encargado de agregar la condicion de cuando una fila es seleccionable */
-  public isRowSelectable(event: Student): boolean {
-    return event.oid !== null;
+   /*Metodo encargado de agregar la condicion de cuando una fila es seleccionable */
+  public isRowSelectable(row: { data: any; index: number; }): boolean {
+    const student: Student = row.data;
+    return student.oid !== null;
   }
+
 
   /*Metodo Crud encargado de crear un nuvo estudiante */
   public createStudent(): void {

@@ -1,0 +1,7 @@
+.p-dropdown-styles{
+  margin-top: 1.6rem;
+}
+
+:host ::ng-deep .p-dropdown{
+  width: 15rem;
+}

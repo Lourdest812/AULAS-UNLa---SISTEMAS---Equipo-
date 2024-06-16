@@ -1,0 +1,43 @@
+<div [formGroup]="classroomForm">
+
+  <div class="formgrid grid m-auto">
+    <div class="col-6 my-3">
+      <div class="flex flex-column gap-2">
+        <label for="username">Nombre</label>
+        <input pInputText formControlName="name"/>
+      </div>
+    </div>
+
+    <div class="col-6 my-3">
+      <label class="block mb-2" for="locale-user">Capacidad</label>
+      <p-inputNumber mode="decimal" inputId="withoutgrouping" [useGrouping]="false"
+        formControlName="capability"></p-inputNumber>
+    </div>
+
+    <div class="col-6 my-3" >
+      <p-checkbox
+      formControlName="hasBlackboard"
+      [binary]="true"
+      inputId="hasBlackboardId" />
+      <label for="hasBlackboar" class="label-button">Tiene pizarron</label>
+    </div>
+
+    <div class="col-6 my-3" >
+      <p-checkbox
+      formControlName="hasProjector"
+      [binary]="true"
+      inputId="hasProjectorId" />
+      <label for="hasProjector" class="label-button">Tiene proyector</label>
+    </div>
+
+</div>
+
+<div class="flex justify-content-between flex-wrap m-2">
+  <div class="flex align-items-center justify-content-center">
+    <p-button (onClick)="cancelForm()" label="Cancelar" severity="danger"></p-button>
+  </div>
+
+  <div class="flex align-items-center justify-content-center">
+    <p-button (onClick)="onSave()" label="Guardar" severity="success"></p-button>
+  </div>
+</div>

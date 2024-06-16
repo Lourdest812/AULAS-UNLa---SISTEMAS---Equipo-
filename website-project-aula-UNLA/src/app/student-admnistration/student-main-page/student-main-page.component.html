@@ -4,7 +4,7 @@
       [rounded]="true" severity="success"></p-button>
     <p-button (click)="showDialog()" class="mx-1" icon="pi pi-pencil" [rounded]="true"
       [disabled]="!(this.seletedStudents.length == 1)" severity="danger"></p-button>
-    <p-button (click)="deleteStudents($event)" class="mx-1" icon="pi pi-trash" [rounded]="true"></p-button>
+    <p-button (click)="deleteStudents($event)" [disabled]="(this.seletedStudents.length < 1)" class="mx-1" icon="pi pi-trash" [rounded]="true"></p-button>
     <p-confirmDialog [transitionOptions]="'300ms'"/>
   </div>
   <p-table [value]="students" [(selection)]="seletedStudents" (selectionChange)="onSelectionChange($event)"
