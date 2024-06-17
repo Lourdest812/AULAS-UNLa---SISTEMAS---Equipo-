@@ -32,11 +32,11 @@
         <td>{{course.oid}}</td>
         <td>{{course.subject}}</td>
         <td>{{course.student_limit}}</td>
-        <td>{{course.classroomName}}</td>
+        <td>{{course.classroomName ? course.classroomName : "No tiene"}}</td>
         <td>{{course.dictationYear}}</td>
-        <td>{{course.fourMonthPeriod}}</td>
-        <td><p-button class="mx-1" icon="pi-list"/></td>
-        <td><p-button class="mx-1" icon="pi-list"/></td>
+        <td>{{course.fourMonthPeriod | enumValue}}</td>
+        <td><p-button class="mx-1" icon="pi pi-list"/></td>
+        <td><p-button class="mx-1" icon="pi pi-list"/></td>
       </tr>
     </ng-template>
   </p-table>

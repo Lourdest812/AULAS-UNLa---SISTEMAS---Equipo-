@@ -144,6 +144,7 @@ export class CourseManagementComponent implements OnInit {
     this.courseService.getCourses().subscribe({
       next: (value: Course[]) => {
         this.courses = value;
+        console.log(this.courses);
       }
     })
   }

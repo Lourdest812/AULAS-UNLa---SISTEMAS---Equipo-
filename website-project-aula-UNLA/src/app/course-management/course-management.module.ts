@@ -10,12 +10,13 @@ import { DropdownModule } from 'primeng/dropdown';
 import { PickListModule } from 'primeng/picklist';
 import { DragDropModule } from 'primeng/dragdrop';
 import { PanelModule } from 'primeng/panel';
+import { EnumValuePipe } from './pipe/enum-value.pipe';
 
 
 
 
 @NgModule({
-  declarations: [CourseManagementComponent, CourseFormComponent],
+  declarations: [CourseManagementComponent, CourseFormComponent, EnumValuePipe],
   imports: [
     CommonModule,
     CourseManagementRoutingModule,

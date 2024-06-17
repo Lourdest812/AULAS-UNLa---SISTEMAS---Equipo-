@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS `proyecto_aula_unla_equipo1`.`course` (
   `idcourse` BIGINT NOT NULL AUTO_INCREMENT,
   `subject` VARCHAR(50) NOT NULL,
   `dictation_year` VARCHAR(50) NULL,
-  `four_month_period` ENUM('FIRST', 'SECOND', 'THIRD', 'FOURTH') NOT NULL,
+  `four_month_period` ENUM('FIRST_QUARTER', 'SECOND_TERM', 'ANNUAL') NOT NULL,
   `student_limit` BIGINT NOT NULL,
   `classroom_idAula` BIGINT,
   PRIMARY KEY (`idcourse`),
