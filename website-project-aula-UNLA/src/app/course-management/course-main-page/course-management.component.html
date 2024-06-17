@@ -35,18 +35,36 @@
         <td>{{course.classroomName}}</td>
         <td>{{course.dictationYear}}</td>
         <td>{{course.fourMonthPeriod}}</td>
-        <td><p-button class="mx-1" icon="pi-list"/></td>
-        <td><p-button class="mx-1" icon="pi-list"/></td>
+        <td><p-button (click)="detailsStudent(course.students)" class="mx-1" icon="pi pi-users"/></td>
+        <td><p-button (click)="detailsTeacher(course.teachers)" class="mx-1" icon="pi pi-users"/></td>
       </tr>
     </ng-template>
   </p-table>
 
-  <p-dialog [style]="dialogStyles" header="Formulario Profesor" [closable]="false" [(visible)]="visibleModal"
+  <p-dialog [style]="dialogStyles" header="Formulario Cursos" [closable]="false" [(visible)]="visibleModal"
     [modal]="true" [draggable]="false" [resizable]="false">
     <p-divider></p-divider>
 
     <course-form *ngIf="visibleModal" (showDialogEvent)="recieveDialogEvent($event)"
       [courseElement]="courseElement"></course-form>
+
+  </p-dialog>
+
+  <p-dialog [style]="dialogDetails" header="Detalle de alumnos" [closable]="false" [(visible)]="visibleModalDetailStudent"
+    [modal]="true" [draggable]="false" [resizable]="false">
+    <p-divider></p-divider>
+
+    <student-detail *ngIf="visibleModalDetailStudent" (showDialogEvent)="recieveDialogEventStudent($event)"
+      [listStudent]="detailStudents"></student-detail>
+
+  </p-dialog>
+
+  <p-dialog [style]="dialogDetails" header="Detalle de profesores" [closable]="false" [(visible)]="visibleModalDetailTeacher"
+    [modal]="true" [draggable]="false" [resizable]="false">
+    <p-divider></p-divider>
+
+    <teacher-detail *ngIf="visibleModalDetailTeacher" (showDialogEvent)="recieveDialogEventTeacher($event)"
+      [listTeacher]="detailTeachers"></teacher-detail>
 
   </p-dialog>
 </div>

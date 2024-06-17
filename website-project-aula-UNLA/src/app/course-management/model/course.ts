@@ -7,7 +7,8 @@ export class Course {
   subject!: string
   dictationYear!: string
   student_limit!: number
-  classroom!: Classroom
+  classroomOid!: number;
+  classroomName!: string;
   fourMonthPeriod!: FourMonthPeriod
   students!: Student[]
   teachers!: Teacher[]

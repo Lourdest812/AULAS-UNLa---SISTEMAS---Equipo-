@@ -3,6 +3,8 @@ import { CourseService } from '../service/course.service';
 import { Course } from '../model/course';
 import { MessageService, ConfirmationService } from 'primeng/api';
 import { DialogEventResponse } from '../../shared/shared-class/dialogEventResponse';
+import { Student } from '../../student-admnistration/model/student';
+import { Teacher } from '../../teacher-administration/model/teacher';
 
 @Component({
   selector: 'app-course-management',
@@ -15,14 +17,28 @@ export class CourseManagementComponent implements OnInit {
 
   public seletedCourses: Course[] = [];
 
+  // Para el modal del crud
   public visibleModal: boolean = false;
+
+  public detailStudents!: Student[];
+
+  public detailTeachers!: Teacher[];
+
+  public visibleModalDetailStudent: boolean = false;
+
+  public visibleModalDetailTeacher: boolean = false;
 
   public courseElement: Course = new Course();
 
-  //Estilos para Dialog de formulario de estudiantes
+  //Estilos para Dialog de formulario de cursos
   public dialogStyles = {
     width: '40vw',
   };
+
+  // Estilos para el dialog de detalles de alumnos y profesores
+  public dialogDetails = {
+    with: '50vw'
+  }
 
   public messageConfirmation = {
     padding: '0.2rem',
@@ -119,7 +135,7 @@ export class CourseManagementComponent implements OnInit {
     this.messageService.add({ severity: 'success', summary: 'Operacion Exitosa', detail: 'El curso fue actualizado con exito', styleClass:'custom-success-operation' });
   }
 
-  // Metodo encargado de recibir el Ouput de teacher-formComponent. Se fija el valor del elemento y dependiendo
+  // Metodo encargado de recibir el Ouput de course-formComponent. Se fija el valor del elemento y dependiendo
   // los datos que tenga se hace una operacion update o create
   public recieveDialogEvent($event: DialogEventResponse): void {
     if (this.courseElement !== null && this.courseElement !== undefined && $event.eventCancel != true) {
@@ -139,6 +155,14 @@ export class CourseManagementComponent implements OnInit {
     this.visibleModal = true;
   }
 
+  public recieveDialogEventStudent($event: DialogEventResponse): void{
+    this.visibleModalDetailStudent = $event.closeDialog;
+  }
+
+  public recieveDialogEventTeacher($event: DialogEventResponse): void{
+    this.visibleModalDetailTeacher = $event.closeDialog;
+  }
+
   //Metodo encargado de cargar la tabla con la informacion de profesores
   public loadCourseList(): void {
     this.courseService.getCourses().subscribe({
@@ -152,11 +176,21 @@ export class CourseManagementComponent implements OnInit {
     Se utiliza para que cuando se quiera hacer un update se pase bien la referencia al formulario
     del objeto que se quiere modificar
   */
-  public onSelectionChange($event: Course[]) {
+  public onSelectionChange($event: Course[]): void{
     if ($event[0] !== undefined) {
       this.courseElement = $event[0];
     } else {
       this.courseElement = new Course();
     }
+  }
+
+  public detailsStudent(students: Student[]): void{
+    this.detailStudents = students;
+    this.visibleModalDetailStudent = true;
+  }
+
+  public detailsTeacher(teachers: Teacher[]): void{
+    this.detailTeachers = teachers;
+    this.visibleModalDetailTeacher = true;
   }
 }

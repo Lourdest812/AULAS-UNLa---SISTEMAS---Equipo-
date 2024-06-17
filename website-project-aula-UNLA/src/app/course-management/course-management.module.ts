@@ -10,12 +10,14 @@ import { DropdownModule } from 'primeng/dropdown';
 import { PickListModule } from 'primeng/picklist';
 import { DragDropModule } from 'primeng/dragdrop';
 import { PanelModule } from 'primeng/panel';
+import { StudentDetailComponent } from './student-detail/student-detail.component';
+import { TeacherDetailComponent } from './teacher-detail/teacher-detail.component';
 
 
 
 
 @NgModule({
-  declarations: [CourseManagementComponent, CourseFormComponent],
+  declarations: [CourseManagementComponent, CourseFormComponent, StudentDetailComponent, TeacherDetailComponent],
   imports: [
     CommonModule,
     CourseManagementRoutingModule,

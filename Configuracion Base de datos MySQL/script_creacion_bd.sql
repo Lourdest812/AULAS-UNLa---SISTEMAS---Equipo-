@@ -35,6 +35,8 @@ CREATE TABLE IF NOT EXISTS `proyecto_aula_unla_equipo1`.`student` (
   PRIMARY KEY (`idalumno`))
 ENGINE = InnoDB;
 
+
+
 -- -----------------------------------------------------
 -- Table `proyecto_aula_unla_equipo1`.`teacher`
 -- -----------------------------------------------------
@@ -53,7 +55,7 @@ CREATE TABLE IF NOT EXISTS `proyecto_aula_unla_equipo1`.`course` (
   `idcourse` BIGINT NOT NULL AUTO_INCREMENT,
   `subject` VARCHAR(50) NOT NULL,
   `dictation_year` VARCHAR(50) NULL,
-  `four_month_period` ENUM('FIRST', 'SECOND', 'THIRD', 'FOURTH') NOT NULL,
+  `four_month_period` ENUM('FIRST_QUARTER', 'SECOND_TERM', 'ANNUAL') NOT NULL,
   `student_limit` BIGINT NOT NULL,
   `classroom_idAula` BIGINT,
   PRIMARY KEY (`idcourse`),
@@ -62,6 +64,16 @@ CREATE TABLE IF NOT EXISTS `proyecto_aula_unla_equipo1`.`course` (
     REFERENCES `proyecto_aula_unla_equipo1`.`classroom` (`idAula`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `proyecto_aula_unla_equipo1`.`user` (
+  `iduser` BIGINT NOT NULL AUTO_INCREMENT,
+  `username` VARCHAR(50) NOT NULL,
+  `lastName` VARCHAR(50) NULL,
+  `firstName` VARCHAR(50) NULL,
+  `password` VARCHAR(400) NULL,
+  `role_user` ENUM('ADMIN', 'TEACHER', 'STUDENT') NOT NULL,
+  PRIMARY KEY (`iduser`))
 ENGINE = InnoDB;
 
 -- -----------------------------------------------------

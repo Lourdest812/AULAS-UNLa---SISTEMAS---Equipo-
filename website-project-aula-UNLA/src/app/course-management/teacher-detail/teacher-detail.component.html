@@ -1,0 +1,24 @@
+<p-table [value]="listTeacher" [tableStyle]="{ 'min-width': '50rem' }">
+  <ng-template pTemplate="header">
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Numero de Documento</th>
+      </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-teacher>
+    <tr>
+      <td>{{teacher.oid}}</td>
+      <td>{{teacher.name}}</td>
+      <td>{{teacher.lastName}}</td>
+      <td>{{teacher.documentNumber}}</td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<div class="flex justify-content-between flex-wrap m-2">
+  <div class="flex align-items-center justify-content-center">
+    <p-button (onClick)="finishDetail()" label="Volver"></p-button>
+  </div>
+</div>

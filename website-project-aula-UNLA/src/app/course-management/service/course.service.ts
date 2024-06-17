@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { environment } from '../../../enviroments/environment.prod';
 import { Classroom } from '../../classroom-management/model/classroom';
 import { Course } from '../model/course';
+import { Student } from '../../student-admnistration/model/student';
+import { Teacher } from '../../teacher-administration/model/teacher';
 
 @Injectable({
   providedIn: 'root'
@@ -22,11 +24,20 @@ export class CourseService {
   }
 
   public createCourse(course: Course): Observable<boolean> {
+    debugger;
     return this.httpClient.post<boolean>(`${environment.backendUrl}/course`,course,{headers: this.httpHeaders});
   }
 
   public updateCourse(course: Course): Observable<boolean>{
     return this.httpClient.put<boolean>(`${environment.backendUrl}/course/${course.oid}`,course,{headers: this.httpHeaders});
+  }
+
+  public getStudentNotAssociated(courseOid: number): Observable<Student[]>{
+    return this.httpClient.get<Student[]>(`${environment.backendUrl}/course/studentNoAssociated/${courseOid}`);
+  }
+
+  public getTeacherNotAssociated(courseOid: number): Observable<Teacher[]>{
+    return this.httpClient.get<Teacher[]>(`${environment.backendUrl}/course/teacherNoAssociated/${courseOid}`);
   }
 
   public deleteCourses(oids: number[]): Observable<boolean>{

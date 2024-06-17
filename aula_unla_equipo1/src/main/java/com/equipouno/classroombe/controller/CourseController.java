@@ -5,6 +5,10 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 
 import com.equipouno.classroombe.dto.CourseDTO;
+import com.equipouno.classroombe.dto.StudentDTO;
+import com.equipouno.classroombe.dto.TeacherDTO;
+import com.equipouno.classroombe.models.Student;
+import com.equipouno.classroombe.models.Teacher;
 
 public interface CourseController {
 
@@ -17,4 +21,8 @@ public interface CourseController {
 	public ResponseEntity<Boolean> createCourse(CourseDTO dto);
 
 	public ResponseEntity<Boolean> deleteCourses(List<Long> oids);
+	
+	public ResponseEntity<List<StudentDTO>> getStudentNotAssociated(Long courseOid);
+	
+	public ResponseEntity<List<TeacherDTO>> getTeachersNotAssociated(Long courseOid);
 }

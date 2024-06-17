@@ -19,13 +19,20 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.equipouno.classroombe.controller.CourseController;
 import com.equipouno.classroombe.dto.CourseDTO;
+import com.equipouno.classroombe.dto.StudentDTO;
+import com.equipouno.classroombe.dto.TeacherDTO;
 import com.equipouno.classroombe.mappers.CourseMapper;
+import com.equipouno.classroombe.mappers.StudentMapper;
+import com.equipouno.classroombe.mappers.TeacherMapper;
+import com.equipouno.classroombe.models.Student;
+import com.equipouno.classroombe.models.Teacher;
 import com.equipouno.classroombe.service.CourseService;
 import com.equipouno.classroombe.service.impl.CourseServiceImpl;
 
 import jakarta.validation.Valid;
 
-@CrossOrigin(origins = "http://localhost:4200",methods = {RequestMethod.DELETE,RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT})
+@CrossOrigin(origins = "http://localhost:4200", methods = { RequestMethod.DELETE, RequestMethod.GET, RequestMethod.POST,
+		RequestMethod.PUT })
 @RestController(CourseControllerImpl.BEAN_NAME)
 @RequestMapping(path = "course")
 public class CourseControllerImpl implements CourseController {
@@ -38,6 +45,12 @@ public class CourseControllerImpl implements CourseController {
 
 	@Autowired
 	private CourseMapper courseMapper;
+
+	@Autowired
+	private StudentMapper studentMapper;
+
+	@Autowired
+	private TeacherMapper teacherMapper;
 
 	@Override
 	@GetMapping(path = "/all")
@@ -74,12 +87,34 @@ public class CourseControllerImpl implements CourseController {
 		return new ResponseEntity<Boolean>(true, HttpStatus.OK);
 	}
 
+	@Override
+	@GetMapping(path = "/studentNoAssociated/{courseOid}")
+	public ResponseEntity<List<StudentDTO>> getStudentNotAssociated(@PathVariable Long courseOid) {
+		List<StudentDTO> response = getStudentMapper().studentsToDTOList(getCourseService().getStudentsNotAssociated(courseOid));
+		return new ResponseEntity<List<StudentDTO>>(response, HttpStatus.OK);
+	}
+
+	@Override
+	@GetMapping(path = "/teacherNoAssociated/{courseOid}")
+	public ResponseEntity<List<TeacherDTO>> getTeachersNotAssociated(@PathVariable Long courseOid) {
+		List<TeacherDTO> response = getTeacherMapper().teachersToDTOList(getCourseService().getTeachersNotAssociated(courseOid));
+		return new ResponseEntity<List<TeacherDTO>>(response, HttpStatus.OK);
+	}
+
 	public CourseService getCourseService() {
 		return courseService;
 	}
 
 	public CourseMapper getCourseMapper() {
 		return courseMapper;
+	}
+
+	public StudentMapper getStudentMapper() {
+		return studentMapper;
+	}
+
+	public TeacherMapper getTeacherMapper() {
+		return teacherMapper;
 	}
 
 }

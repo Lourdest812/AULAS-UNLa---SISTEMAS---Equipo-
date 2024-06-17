@@ -9,6 +9,7 @@ import { Student } from '../../student-admnistration/model/student';
 import { Teacher } from '../../teacher-administration/model/teacher';
 import { StudentService } from '../../student-admnistration/service/student.service';
 import { TeacherService } from '../../teacher-administration/service/teacher.service';
+import { CourseService } from '../service/course.service';
 
 @Component({
   selector: 'course-form',
@@ -42,6 +43,7 @@ export class CourseFormComponent {
   constructor(
     private fb: FormBuilder,
     private classroomService: ClassroomService,
+    private courseService: CourseService,
     private studentService: StudentService,
     private teacherService: TeacherService){
     this.initializeCourseForm();
@@ -77,14 +79,16 @@ export class CourseFormComponent {
       this.courseElement.student_limit = this.courseForm.controls['studentLimit'].value;
     }
     if(this.courseForm.controls['classroom'].value !== null && this.courseForm.controls['classroom'].value !== undefined){
-      this.courseElement.classroom = this.courseForm.controls['classroom'].value;
+      this.courseElement.classroomOid = this.courseForm.controls['classroom'].value.oid;
+      this.courseElement.classroomName = this.courseForm.controls['classroom'].value.name;
     }
     if(this.courseForm.controls['fourMonthPeriod'].value !== null && this.courseForm.controls['fourMonthPeriod'].value !== undefined){
-      this.courseElement.fourMonthPeriod = this.courseForm.controls['fourMonthPeriod'].value;
+      this.courseElement.fourMonthPeriod = this.courseForm.controls['fourMonthPeriod'].value.value;
     }
     if(this.courseForm.controls['dictationYear'].value !== null && this.courseForm.controls['dictationYear'].value !== undefined){
       this.courseElement.dictationYear = this.courseForm.controls['dictationYear'].value;
     }
+
 
     if(this.targetStudent.length >= 1 ){
       this.courseElement.students = this.targetStudent;
@@ -100,8 +104,14 @@ export class CourseFormComponent {
     this.courseForm.controls['oid'].setValue(this.courseElement.oid);
     this.courseForm.controls['subject'].setValue(this.courseElement.subject);
     this.courseForm.controls['studentLimit'].setValue(this.courseElement.student_limit);
-    this.courseForm.controls['classroom'].setValue(this.courseElement.classroom);
-    this.courseForm.controls['fourMonthPeriod'].setValue(this.courseElement.fourMonthPeriod);
+    if(this.courseElement.classroomOid !== null && this.courseElement.classroomOid !== undefined){
+      this.classroomService.getClassroom(this.courseElement.classroomOid).subscribe({
+        next: (value: Classroom) =>{
+          this.courseForm.controls['classroom'].setValue(value);
+        }
+      })
+    }
+    this.courseForm.controls['fourMonthPeriod'].setValue(this.getEnumValue(this.courseElement.fourMonthPeriod));
     this.courseForm.controls['dictationYear'].setValue(this.courseElement.dictationYear);
   }
 
@@ -125,25 +135,72 @@ export class CourseFormComponent {
   }
 
   public loadPickListStudent(): void{
-    this.studentService.getStudents().subscribe({
-      next: (value: Student[]) => {
-        this.sourceStudent = value;
-      }
-    })
-    this.targetStudent = [];
+    if(this.courseElement.oid){
+      this.courseService.getStudentNotAssociated(this.courseElement.oid).subscribe({
+        next: (value: Student[]) => {
+          this.sourceStudent = value;
+        }
+      })
+    } else {
+      this.studentService.getStudents().subscribe({
+        next: (value: Student[]) =>{
+          this.sourceStudent = value;
+        }
+      })
+    }
+    this.targetStudent = structuredClone(this.courseElement.students);
   }
 
   public loadPickListTeacher(): void{
-    this.teacherService.getTeachers().subscribe({
-      next: (value: Teacher[]) =>{
-        this.sourceTeacher = value;
-      }
-    })
-    this.targetTeacher = [];
+    if(this.courseElement.oid){
+      this.courseService.getTeacherNotAssociated(this.courseElement.oid).subscribe({
+        next: (value: Teacher[]) =>{
+          this.sourceTeacher = value;
+        }
+      })
+    } else {
+      this.teacherService.getTeachers().subscribe({
+        next: (value: Teacher[]) => {
+          this.sourceTeacher = value;
+        }
+      })
+    }
+    this.targetTeacher = structuredClone(this.courseElement.teachers) ;
   }
 
-  public enumToArray(enumObj: any): { label: string, value: FourMonthPeriod }[] {
-    return Object.keys(enumObj).map(key => ({ label: enumObj[key], value: enumObj[key] }));
+  enumToArray(enumObj: any): { label: string, value: FourMonthPeriod }[] {
+    return Object.keys(enumObj).map(key => ({
+      label: this.getEnumLabel(enumObj[key]),
+      value: key as FourMonthPeriod
+    }));
+  }
+
+  getEnumLabel(enumValue: FourMonthPeriod): string {
+    switch (enumValue) {
+      case FourMonthPeriod.FIRST_QUARTER:
+        return 'Primer Cuatrimestre';
+      case FourMonthPeriod.SECOND_TERM:
+        return 'Segundo Cuatrimestre';
+      case FourMonthPeriod.ANNUAL:
+        return 'Anual';
+      default:
+        return '';
+    }
+  }
+
+  public getEnumValue(fourMonthPeriod: string){
+    switch(fourMonthPeriod){
+      case 'FIRST_QUARTER':
+        return { label: 'Primer Cuatrimestre', value: "FIRST_QUARTER" };
+
+      case 'SECOND_TERM':
+        return { label: 'Segundo Cuatrimestre', value: "SECOND_TERM"};
+
+      case 'ANNUAL':
+        return { label: 'Anual', value: "ANNUAL"};
+      default:
+        return '';
+    }
   }
 
 }

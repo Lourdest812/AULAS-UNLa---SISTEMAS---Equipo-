@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import com.equipouno.classroombe.dao.CourseDAO;
 import com.equipouno.classroombe.exceptions.ServiceException;
 import com.equipouno.classroombe.models.Course;
+import com.equipouno.classroombe.models.Student;
+import com.equipouno.classroombe.models.Teacher;
 import com.equipouno.classroombe.service.CourseService;
 
 @Service(CourseServiceImpl.BEAN_NAME)
@@ -68,6 +70,28 @@ public class CourseServiceImpl implements CourseService {
 
 	public CourseDAO getCourseDAO() {
 		return courseDAO;
+	}
+
+	@Override
+	public List<Teacher> getTeachersNotAssociated(Long courseOid) {
+		try {
+			return getCourseDAO().getTeachersAssociated(courseOid);
+		} catch(DataAccessException e) {
+			throw e;
+		} catch(Exception e) {
+			throw new ServiceException("Ocurrio un problema al querer trer los profesores asociados al curso " + courseOid);
+		}
+	}
+
+	@Override
+	public List<Student> getStudentsNotAssociated(Long courseOid) {
+		try {
+			return getCourseDAO().getStudentsAssociated(courseOid);
+		} catch(DataAccessException e) {
+			throw e;
+		} catch(Exception e) {
+			throw new ServiceException("Ocurrio un problema al querer trer los estudiantes asociados al curso " + courseOid);
+		}
 	}
 
 }

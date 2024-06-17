@@ -45,13 +45,13 @@ public abstract class CourseMapper {
 	@Mapping(target = "classroomOid", source = "entity.classroom.oid")
 	@Mapping(target = "classroomName", source = "entity.classroom.name")
 	public abstract CourseDTO courseToDTO(Course entity);
-
-//	@BeforeMapping
-//	protected void mapClassroom(CourseDTO dto, @MappingTarget Course course) {
-//		if (dto.getClassroomOid() != null) {
-//			course.setClassroom(getClassroomService().findByOid(dto.getClassroomOid()).orElseThrow());
-//		}
-//	}
+	
+	@BeforeMapping
+	protected void mapClassroom(CourseDTO dto, @MappingTarget Course course) {
+		if (dto.getClassroomOid() != null) {
+			course.setClassroom(getClassroomService().findByOid(dto.getClassroomOid()).orElseThrow());
+		}
+	}
 
 	public abstract List<CourseDTO> coursesToDTOList(List<Course> courses);
 
