@@ -12,6 +12,7 @@ import { DragDropModule } from 'primeng/dragdrop';
 import { PanelModule } from 'primeng/panel';
 import { StudentDetailComponent } from './student-detail/student-detail.component';
 import { TeacherDetailComponent } from './teacher-detail/teacher-detail.component';
+import { EnumValuePipe } from './pipe/enum-value.pipe';
 
 
 

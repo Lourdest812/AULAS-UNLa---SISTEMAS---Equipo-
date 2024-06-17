@@ -32,7 +32,7 @@
         <td>{{course.oid}}</td>
         <td>{{course.subject}}</td>
         <td>{{course.student_limit}}</td>
-        <td>{{course.classroomName}}</td>
+        <td>{{course.classroomName ? course.classroomName : "No tiene"}}</td>
         <td>{{course.dictationYear}}</td>
         <td>{{course.fourMonthPeriod}}</td>
         <td><p-button (click)="detailsStudent(course.students)" class="mx-1" icon="pi pi-users"/></td>
