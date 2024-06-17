@@ -69,8 +69,6 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `proyecto_aula_unla_equipo1`.`user` (
   `iduser` BIGINT NOT NULL AUTO_INCREMENT,
   `username` VARCHAR(50) NOT NULL,
-  `lastName` VARCHAR(50) NULL,
-  `firstName` VARCHAR(50) NULL,
   `password` VARCHAR(400) NULL,
   `role_user` ENUM('ADMIN', 'TEACHER', 'STUDENT') NOT NULL,
   PRIMARY KEY (`iduser`))

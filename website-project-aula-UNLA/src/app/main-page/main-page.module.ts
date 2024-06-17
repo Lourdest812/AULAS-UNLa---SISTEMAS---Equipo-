@@ -20,6 +20,8 @@ import { MenuSidebarItemComponent } from './menu-sidebar-configuration/menu-side
 import { FooterComponent } from './footer/footer.component';
 import { ConfigMainMenuComponent } from './config-main-menu/config-main-menu.component';
 import { SidebarContainerComponent } from './menu-sidebar-configuration/sidebar-container/sidebar-container.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from '../../auth.interceptor';
 
 
 @NgModule({
@@ -42,5 +44,6 @@ import { SidebarContainerComponent } from './menu-sidebar-configuration/sidebar-
     InputSwitchModule,
     FormsModule
   ],
+
 })
 export class MainPageModule { }

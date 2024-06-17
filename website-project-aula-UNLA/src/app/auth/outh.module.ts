@@ -8,12 +8,15 @@ import { SharedModule } from '../shared/shared.module';
 import { PasswordModule } from 'primeng/password';
 import { InputTextModule } from 'primeng/inputtext';
 import { CheckboxModule } from 'primeng/checkbox';
+import { ReactiveFormsModule } from '@angular/forms';
+import { RegisterPageComponent } from './register-page/register-page.component';
 
 
 
 @NgModule({
   declarations: [
     LoginPageComponent,
+    RegisterPageComponent,
     ErrorPageComponent,
     AccessDeniedPageComponent,
   ],
@@ -23,8 +26,8 @@ import { CheckboxModule } from 'primeng/checkbox';
     SharedModule,
     PasswordModule,
     InputTextModule,
-    CheckboxModule
-
+    CheckboxModule,
+    ReactiveFormsModule
   ]
 })
 export class AuthModule { }

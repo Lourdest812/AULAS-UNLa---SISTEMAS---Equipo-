@@ -33,16 +33,6 @@ public class User implements UserDetails {
 	@Column(name = "username")
 	private String username;
 
-	@Size(min = 2, max = 50)
-	@NotBlank
-	@Column(name = "lastName")
-	private String lastName;
-
-	@Size(min = 2, max = 50)
-	@NotBlank
-	@Column(name = "firstName")
-	private String firstName;
-
 	@Size(min = 2, max = 400)
 	@NotBlank
 	@Column(name = "password")
@@ -53,12 +43,10 @@ public class User implements UserDetails {
 	@Column(name = "role_user")
 	private Role role;
 
-	public User(Long oid, String username, String lastName, String firstName, String password, Role role) {
+	public User(Long oid, String username, String password, Role role) {
 		super();
 		this.oid = oid;
 		this.username = username;
-		this.lastName = lastName;
-		this.firstName = firstName;
 		this.password = password;
 		this.role = role;
 	}
@@ -106,22 +94,6 @@ public class User implements UserDetails {
 
 	public void setUsername(String username) {
 		this.username = username;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
 	}
 
 	public String getPassword() {

@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../../../enviroments/environment.prod';
 import { AuthResponse } from '../models/authResponse';
 import { LoginRequest } from '../models/loginRequest';
+import { RegisterRequest } from '../models/registerRequest';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,11 @@ export class AuthService {
   constructor(private httpClient: HttpClient) { }
 
   public login(loginRequest: LoginRequest): Observable<AuthResponse> {
-    return this.httpClient.post<AuthResponse>(`${environment.backendUrl}/auth`, loginRequest,{headers: this.httpHeaders});
+    return this.httpClient.post<AuthResponse>(`${environment.backendUrl}/auth/login`, loginRequest,{headers: this.httpHeaders})
+  }
+
+  public register(registerRequest: RegisterRequest): Observable<AuthResponse> {
+    return this.httpClient.post<AuthResponse>(`${environment.backendUrl}/auth/register`, registerRequest,{headers: this.httpHeaders});
   }
 
 }
