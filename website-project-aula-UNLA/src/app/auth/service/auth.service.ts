@@ -1,6 +1,6 @@
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from '../../../enviroments/environment.prod';
 import { AuthResponse } from '../models/authResponse';
 import { LoginRequest } from '../models/loginRequest';
@@ -11,6 +11,7 @@ import { RegisterRequest } from '../models/registerRequest';
 })
 export class AuthService {
   private httpHeaders = new HttpHeaders({'Content-type': 'application/json'});
+
 
   constructor(private httpClient: HttpClient) { }
 

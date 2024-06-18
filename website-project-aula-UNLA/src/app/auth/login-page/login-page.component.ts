@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { LoginRequest } from '../models/loginRequest';
 import { AuthService } from '../service/auth.service';
 import { Router } from '@angular/router';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-login-page',
@@ -20,6 +21,8 @@ import { Router } from '@angular/router';
   ],
 })
 export class LoginPageComponent {
+  private roleSubject: BehaviorSubject<string> = new BehaviorSubject<string>("");
+  public role$: Observable<string> = this.roleSubject.asObservable();
   valCheck: string[] = ['remember'];
   form: FormGroup;
 
@@ -28,11 +31,17 @@ export class LoginPageComponent {
       username: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required),
     });
+    const savedRole = sessionStorage.getItem('role');
+    if (savedRole) {
+      this.roleSubject.next(savedRole);
+    }
   }
 
   onSubmit() {
     this.authService.login(this.getBody()).subscribe(response => {
       sessionStorage.setItem('jwtToken', response.token.toString());
+      sessionStorage.setItem('role', JSON.stringify(response.role.toString()));
+      this.roleSubject.next(response.role.toString());
       this.router.navigate(['/dashboard']); // Navigate to a protected route after login
     });
   }
@@ -43,6 +52,6 @@ export class LoginPageComponent {
       password: this.form.get('password')?.value,
     }
     console.log(body);
-  return body;
+    return body;
   }
 }

@@ -5,6 +5,7 @@ import { LayoutService } from '../../main-page/services/layout.service';
 import { AuthService } from '../service/auth.service';
 import { RegisterRequest } from '../models/registerRequest';
 import { Router } from '@angular/router';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-register-page',
@@ -23,6 +24,8 @@ import { Router } from '@angular/router';
 export class RegisterPageComponent {
   valCheck: string[] = ['remember'];
   form: FormGroup;
+  private roleSubject: BehaviorSubject<string> = new BehaviorSubject<string>("");
+  public role$: Observable<string> = this.roleSubject.asObservable();
 
   roles = ['ADMIN', 'STUDENT', 'TEACHER']
 
@@ -37,6 +40,8 @@ export class RegisterPageComponent {
   onSubmit() {
     this.authService.register(this.getBody()).subscribe(response => {
       sessionStorage.setItem('jwtToken', response.token.toString());
+      sessionStorage.setItem('role', JSON.stringify(response.role.toString()));
+      this.roleSubject.next(response.role.toString());
       this.router.navigate(['/dashboard']); // Navigate to a protected route after login
     });
   }

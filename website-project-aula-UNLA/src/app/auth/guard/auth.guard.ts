@@ -15,9 +15,9 @@ export class AuthGuard implements CanActivate {
     const token = sessionStorage.getItem('jwtToken');
 
     if (token) {
-      return true; // If the token is present, allow access
+      return true;
     } else {
-      this.router.navigate(['/login']); // If no token, redirect to login
+      this.router.navigate(['/login']);
       return false;
     }
   }

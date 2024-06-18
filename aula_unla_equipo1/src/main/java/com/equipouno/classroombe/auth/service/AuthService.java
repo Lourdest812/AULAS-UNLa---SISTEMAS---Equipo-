@@ -1,9 +1,12 @@
 package com.equipouno.classroombe.auth.service;
 
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -43,9 +46,15 @@ public class AuthService {
 	public AuthResponse register(RegisterRequest request) {
 		User user = new User(null, request.getUserName(), passwordEncoder.encode(request.getPassword()), request.getRole());
 
+		
+		String token = getJwtService().getToken(user);
+		String role = user.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.joining(","));
+
 		getUserRepository().save(user);
 
-		return new AuthResponse(getJwtService().getToken(user));
+		return new AuthResponse(token, role);
 	}
 
 	public UserRepository getUserRepository() {
