@@ -6,15 +6,19 @@ import { Observable } from 'rxjs';
 export class AuthInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    // Obtener el token del sessionStorage
-    const token = sessionStorage.getItem('jwtToken');
+    // Definir las rutas que no requieren el token
+    const excludedUrls = ['/auth/login', '/auth/register'];
 
-    if (token) {
-      request = request.clone({
-        setHeaders: {
-          Authorization: `Bearer ${token}`
-        }
-      });
+    // Si la URL no está en las excluidas, agregar el token
+    if (!excludedUrls.some(url => request.url.includes(url))) {
+      const token = sessionStorage.getItem('jwtToken');
+      if (token) {
+        request = request.clone({
+          setHeaders: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+      }
     }
 
     return next.handle(request);

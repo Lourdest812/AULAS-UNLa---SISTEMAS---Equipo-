@@ -47,6 +47,7 @@ export class RegisterPageComponent {
       password: this.form.get('password')?.value,
       role: this.form.get('role')?.value,
     }
+    console.log(body);
     return body;
   }
 }

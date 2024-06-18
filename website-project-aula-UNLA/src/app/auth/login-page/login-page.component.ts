@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { LayoutService } from '../../main-page/services/layout.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { LoginRequest } from '../models/loginRequest';
 
 @Component({
   selector: 'app-login-page',
@@ -22,12 +23,20 @@ export class LoginPageComponent {
 
   constructor(public layoutService: LayoutService) {
     this.form = new FormGroup({
-      userName: new FormControl(Validators.required),
+      username: new FormControl(Validators.required),
       password: new FormControl(Validators.required),
     });
   }
 
   onSubmit() {
 
+  }
+
+  getBody(): LoginRequest {
+    let body: LoginRequest = {
+      username: this.form.get('username')?.value,
+      password: this.form.get('password')?.value,
+    }
+  return body;
   }
 }
