@@ -9,6 +9,10 @@ organización de sus clases.
 La primera entrega consta de un MVP, con la integración temprana de los datos del back con el front y al menos un ABM completo.
 El backend y los datos de prueba están completos y desarrollados. 
 
+## Entregable N°2
+
+Ls segunda entrega consta del ABM completo del sistema de aulas, con login y registro incluidos. La lógica incluye roles con JWT y una vista detallada de materias con aulas, docentes y estudiantes asignados. Sin embargo, los roles de docente y estudiante tienen el mismo acceso que el administrador.
+
 ## Instrucciones para levantar el proyecto
 
 Es primordial ejecutar los scripts de creación de tablas y alta de datos de mock. Deberían ejecutarse en base MySQL en localhost, y cambiar el usuario y contraseña de la base localhost en el **application.properties** que se encuentra en el directorio /aula_unla_equipo1/src/main/resources. Ejecutar el proyecto Maven y levantar el Front End usando `ng serve -o` con la terminal en la carpeta raíz (website-project-aula-UNLA):
