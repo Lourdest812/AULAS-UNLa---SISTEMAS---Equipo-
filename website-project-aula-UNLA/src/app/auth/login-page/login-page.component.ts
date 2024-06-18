@@ -40,7 +40,7 @@ export class LoginPageComponent {
   onSubmit() {
     this.authService.login(this.getBody()).subscribe(response => {
       sessionStorage.setItem('jwtToken', response.token.toString());
-      sessionStorage.setItem('role', JSON.stringify(response.role.toString()));
+      sessionStorage.setItem('role', response.role.toString());
       this.roleSubject.next(response.role.toString());
       this.router.navigate(['/dashboard']); // Navigate to a protected route after login
     });
