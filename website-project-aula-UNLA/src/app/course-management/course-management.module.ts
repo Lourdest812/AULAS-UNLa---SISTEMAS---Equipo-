@@ -18,7 +18,7 @@ import { EnumValuePipe } from './pipe/enum-value.pipe';
 
 
 @NgModule({
-  declarations: [CourseManagementComponent, CourseFormComponent, StudentDetailComponent, TeacherDetailComponent],
+  declarations: [CourseManagementComponent, CourseFormComponent, StudentDetailComponent, TeacherDetailComponent, EnumValuePipe],
   imports: [
     CommonModule,
     CourseManagementRoutingModule,
